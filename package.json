@@ -1,0 +1,29 @@
+{
+  "name": "gatsby-plugin-dataunlocker",
+  "version": "1.0.0",
+  "description": "DataUnlocker's integration to Gatsby",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dataunlocker/gatsby-plugin-dataunlocker.git"
+  },
+  "keywords": [
+    "dataunlocker",
+    "gatsby",
+    "script"
+  ],
+  "author": "Nikita Savchenko <https://nikita.tk>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/dataunlocker/gatsby-plugin-dataunlocker/issues"
+  },
+  "homepage": "https://github.com/dataunlocker/gatsby-plugin-dataunlocker#readme",
+  "dependencies": {
+    "fs-extra": "^10.0.0",
+    "node-fetch": "^2.6.5",
+    "tiny-glob": "^0.2.9"
+  }
+}
