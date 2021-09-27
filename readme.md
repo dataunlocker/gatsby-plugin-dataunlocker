@@ -1,5 +1,8 @@
 # gatsby-plugin-dataunlocker
 
+[![Node.js package](https://github.com/dataunlocker/gatsby-plugin-dataunlocker/actions/workflows/build-and-push.yaml/badge.svg)](https://github.com/dataunlocker/gatsby-plugin-dataunlocker/actions/workflows/build-and-push.yaml)
+[![Package version](https://img.shields.io/npm/l/gatsby-plugin-dataunlocker)](https://www.npmjs.com/package/gatsby-plugin-dataunlocker)
+
 [DataUnlocker](https://dataunlocker.com) integration with Gatsby-powered websites.
 
 - Injects DataUnlocker's script to all website's pages using the
@@ -12,15 +15,18 @@ endpoints in [DataUnlocker Admin Console](https://admin.dataunlocker.com/).
 
 ## Usage
 
-In your `gatsby-config.js`, use the following:
+Add `gatsby-plugin-dataunlocker` to your project with:
+
+```bash
+npm install gatsby-plugin-dataunlocker
+```
+
+Now in your `gatsby-config.js`, use the following:
 
 ```javascript
 module.exports = {
   plugins: [
-    'other-plugin1',
-    'other-plugin2',
     {
-      // Keep gatsby-plugin-dataunlocker below all other plugins, as it is a post-processing plugin.
       resolve: 'gatsby-plugin-dataunlocker',
       options: {
         propertyId: '6751714b4c5980736a4b6aaa', // Required. Your DataUnlocker property ID.

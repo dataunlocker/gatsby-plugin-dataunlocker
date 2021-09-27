@@ -1,6 +1,6 @@
 {
   "name": "gatsby-plugin-dataunlocker",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "DataUnlocker's integration to Gatsby",
   "main": "gatsby-node.js",
   "scripts": {
