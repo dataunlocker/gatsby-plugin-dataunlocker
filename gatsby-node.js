@@ -26,7 +26,7 @@ exports.pluginOptionsSchema = ({ Joi }) => {
 const processHtmlFile = async (filePath, { propertyId, scriptVersion }) => {
   let apiResult;
   let processedBody = '';
-  
+
   const fileContents = await fs.readFile(filePath);
   if (!/<head>/i.test(fileContents)) {
     console.log(
