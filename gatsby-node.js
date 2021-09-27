@@ -1,9 +1,10 @@
 const glob = require(`tiny-glob`);
 const fs = require(`fs-extra`);
-const { createReadStream } = require(`fs`);
+const { createReadStream, readFile } = require(`fs`);
 const fetch = require(`node-fetch`);
 
 const BATCH_RUN_ID = Math.random().toString(36).slice(2);
+const BATCH_MAX_RPS = 6;
 const BATCH_MAX_PARALLEL_API_REQUESTS = 3;
 const DATAUNLOCKER_ENDPOINT = ({ propertyId, scriptVersion }) =>
   `https://api.dataunlocker.com/properties/${propertyId}/scripts/${scriptVersion}/inject?batchRunId=${encodeURIComponent(
@@ -25,6 +26,14 @@ exports.pluginOptionsSchema = ({ Joi }) => {
 const processHtmlFile = async (filePath, { propertyId, scriptVersion }) => {
   let apiResult;
   let processedBody = '';
+  
+  const fileContents = await fs.readFile(filePath);
+  if (!/<head>/i.test(fileContents)) {
+    console.log(
+      `DataUnlocker: skipping ${filePath} as it doesn't look like valid HTML.`
+    );
+    return;
+  }
 
   try {
     console.log(`DataUnlocker: patching ${filePath}`);
@@ -68,9 +77,16 @@ exports.onPostBuild = async (
   const files = await glob(`public/**/*.html`, {
     filesOnly: true,
   });
-  const promises = files.map((fileName) => () =>
-    processHtmlFile(fileName, { propertyId, scriptVersion })
-  );
+  const promises = files.map((fileName) => async () => {
+    const start = Date.now();
+    await processHtmlFile(fileName, { propertyId, scriptVersion });
+    const extra =
+      (1000 / BATCH_MAX_RPS) * BATCH_MAX_PARALLEL_API_REQUESTS -
+      (Date.now() - start);
+    if (extra > 0) {
+      await new Promise((r) => setTimeout(r, extra));
+    }
+  });
 
   // Run tasks in parallel with the max concurrency limited to BATCH_MAX_PARALLEL_API_REQUESTS.
   const workers = new Array(BATCH_MAX_PARALLEL_API_REQUESTS)

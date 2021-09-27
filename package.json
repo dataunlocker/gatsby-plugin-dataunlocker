@@ -2,9 +2,12 @@
   "name": "gatsby-plugin-dataunlocker",
   "version": "1.0.0",
   "description": "DataUnlocker's integration to Gatsby",
-  "main": "index.js",
+  "main": "gatsby-node.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "pretest": "cd test/test-gatsby-website && rm -rf public && npm install && npm run build",
+    "test": "ava test/**/*.test.js",
+    "prettier": "prettier",
+    "autoformat": "prettier --write ./*.js ./test/*.js"
   },
   "repository": {
     "type": "git",
@@ -25,5 +28,16 @@
     "fs-extra": "^10.0.0",
     "node-fetch": "^2.6.5",
     "tiny-glob": "^0.2.9"
+  },
+  "devDependencies": {
+    "ava": "^3.15.0",
+    "esm": "^3.2.25",
+    "prettier": "^2.4.1",
+    "prettier-plugin-organize-imports": "^2.3.4"
+  },
+  "ava": {
+    "require": [
+      "esm"
+    ]
   }
 }
