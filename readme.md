@@ -1,10 +1,14 @@
 # gatsby-plugin-dataunlocker
 
-DataUnlocker integration with Gatsby-powered websites.
+[DataUnlocker](https://dataunlocker.com) integration with Gatsby-powered websites.
 
 - Injects DataUnlocker's script to all website's pages using the
   [dynamic script injection](https://dataunlocker.com/docs/install/script/dynamic/)
   provided by DataUnlocker.
+
+This means each time your website is built, DataUnlocker's script is injected automatically.
+You don't need to manually inject DataUnlocker's script, but you still need to create proxy
+endpoints in [DataUnlocker Admin Console](https://admin.dataunlocker.com/).
 
 ## Usage
 
