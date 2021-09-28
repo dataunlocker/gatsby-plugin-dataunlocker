@@ -37,6 +37,13 @@ module.exports = {
 };
 ```
 
+## Notes
+
++ This plugin will patch every single output HTML file of your website. Pathcing will take some time
+  if you have a lot of pages on your website, as plugin processes approximately 6 pages every second.
++ In case DataUnlocker's API fails to patch HTML files, it will output errors to the build log, but
+  the **build itself won't fail**. Check the API availability [here](https://stats.uptimerobot.com/x6L1mHJoED).
+
 ## License
 
 [MIT](LICENSE) © [DataUnlocker](https://dataunlocker.com)
